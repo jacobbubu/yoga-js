@@ -2,8 +2,8 @@
 import Yoga from "yoga-layout";
 
 /**
- * Value that can generally be represented as either a number, a unit suffixed string (i.e. "10px"), 
- * or in some cases a keyword (i.e. "auto") 
+ * Value that can generally be represented as either a number, a unit suffixed string (i.e. "10px"),
+ * or in some cases a keyword (i.e. "auto")
  */
 declare type YGLiteralValue = string | number;
 
@@ -387,13 +387,16 @@ class YogaNode {
    */
   +layout: YGLayoutResult;
 
+  scale: number;
+
   /**
    * The {@link YogaNode}'s children
    */
   children: Array<?YogaNode>;
 
-  constructor() {
+  constructor(scale: number = 1) {
     this._node = Yoga.Node.create();
+    this.scale = scale;
 
     // this.children = Object.freeze([]);
     this.children = [];
@@ -404,12 +407,16 @@ class YogaNode {
       get(target: YogaNode, name: string) {
         switch (name) {
           case "layout": {
-            const {
+            let {
               top,
               left,
               width,
               height
             } = target._node.getComputedLayout();
+            top /= scale;
+            left /= scale;
+            width /= scale;
+            height /= scale;
             return { top, left, width, height };
           }
           default: {
@@ -429,7 +436,9 @@ class YogaNode {
             );
 
             Object.keys(value).forEach(propName => {
-              processedValue[propName] = value[propName];
+              processedValue[propName] = (typeof value[propName] === 'number')
+                ? value[propName] * scale
+                : value[propName];
             });
 
             return Reflect.set(target, property, processedValue);

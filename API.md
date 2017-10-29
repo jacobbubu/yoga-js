@@ -24,7 +24,7 @@
 
 ## YGLiteralValue
 
-Value that can generally be represented as either a number, a unit suffixed string (i.e. "10px"), 
+Value that can generally be represented as either a number, a unit suffixed string (i.e. "10px"),
 or in some cases a keyword (i.e. "auto")
 
 ## NodeStyle
@@ -98,6 +98,10 @@ Type: {left: [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 ## YogaNode
 
 Yoga layout node
+
+**Parameters**
+
+-   `scale` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)**  (optional, default `1`)
 
 ### children
 

@@ -40,10 +40,10 @@
     "clean": "rimraf dist",
     "clean:docs": "rimraf API.md",
     "commit": "git-cz",
-    "precommit": "yarn run build:docs",
+    "precommit": "npm run build:docs",
     "commitmsg": "conventional-changelog-lint -e",
     "flow": "flow",
-    "prebuild:docs": "yarn run clean:docs",
+    "prebuild:docs": "npm run clean:docs",
     "build:docs": "documentation build src/index.js -f md -o API.md",
     "postbuild:docs": "git add API.md",
     "build:es": "rollup -c config/rollup.es.config.js",
@@ -51,7 +51,7 @@
     "build:umd": "rollup -c config/rollup.umd.config.js",
     "build:flow": "flow gen-flow-files ./src/index.js > ./dist/yogajs.js.flow",
     "build": "npm-run-all build:{es,cjs,umd,flow}",
-    "prebuild": "yarn run clean",
+    "prebuild": "npm run clean",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
